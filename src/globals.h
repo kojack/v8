@@ -77,6 +77,9 @@ namespace internal {
 #elif defined(__MIPSEL__)
 #define V8_HOST_ARCH_MIPS 1
 #define V8_HOST_ARCH_32_BIT 1
+#elif defined(__sparc__)
+#define V8_HOST_ARCH_SPARC 1
+#define V8_HOST_ARCH_32_BIT 1
 #else
 #error Host architecture was not detected as supported by v8
 #endif
@@ -104,6 +107,8 @@ namespace internal {
 #define V8_TARGET_ARCH_ARM 1
 #elif defined(__MIPSEL__)
 #define V8_TARGET_ARCH_MIPS 1
+#elif defined(__sparc__)
+#define V8_TARGET_ARCH_SPARC 1
 #else
 #error Target architecture was not detected as supported by v8
 #endif
@@ -144,6 +149,8 @@ namespace internal {
 #define V8_TARGET_LITTLE_ENDIAN 1
 #elif V8_TARGET_ARCH_MIPS
 #define V8_TARGET_LITTLE_ENDIAN 1
+#elif V8_TARGET_ARCH_SPARC
+#define V8_TARGET_BIG_ENDIAN 1
 #else
 #error Unknown target architecture endiannes
 #endif
