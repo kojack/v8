@@ -42,7 +42,9 @@ inline Atomic32 NoBarrier_CompareAndSwap(volatile Atomic32* ptr,
 
   Atomic32 prev_value;
   do {
-    if (atomic_cas_32(ptr, old_value, new_value) {
+    if (atomic_cas_32(reinterpret_cast<volatile uint32_t*>(ptr),
+		      static_cast<uint32_t>(old_value),
+		      static_cast<uint32_t>(new_value))) {
       return old_value;
     }
     prev_value = *ptr;
@@ -55,7 +57,9 @@ inline Atomic32 NoBarrier_AtomicExchange(volatile Atomic32* ptr,
   Atomic32 old_value;
   do {
     old_value = *ptr;
-  } while (!atomic_cas_32(ptr, old_value, new_value));
+  } while (!atomic_cas_32(reinterpret_cast<volatile uint32_t*>(ptr),
+			  static_cast<uint32_t>(old_value),
+			  static_cast<uint32_t>(new_value)));
   return old_value;
 }
 
@@ -64,7 +68,8 @@ inline Atomic32 NoBarrier_AtomicExchange(volatile Atomic32* ptr,
 inline Atomic32 NoBarrier_AtomicIncrement(volatile Atomic32* ptr,
                                           Atomic32 increment) {
 
-  return atomic_inc_32_nv(ptr, increment);
+  return atomic_add_32_nv(reinterpret_cast<volatile uint32_t*>(ptr),
+			  static_cast<ushort_t>(increment));
 }
 
 inline Atomic32 Barrier_AtomicIncrement(volatile Atomic32* ptr,
