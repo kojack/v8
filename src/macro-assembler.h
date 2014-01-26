@@ -86,6 +86,8 @@ const int kInvalidProtoDepth = -1;
 #include "mips/assembler-mips-inl.h"
 #include "code.h"  // must be after assembler_*.h
 #include "mips/macro-assembler-mips.h"
+#elif V8_TARGET_ARCH_SPARC
+#include "sparc/macro-assembler-sparc.h"
 #else
 #error Unsupported target architecture.
 #endif
